@@ -6,6 +6,7 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
 {
     public AudioClip[] myClips; //Array to store clips for this episode
 
+    public GameObject effect;
     // Awake is called before the first frame update
     void Awake()
     {
@@ -37,13 +38,15 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
     void OnCollisionEnter(Collision other) //Method is needed to determine whether or not it hits a player
     {
         PlaySound(); //Plays sound at an actual position, which will be whether it hits a collider
-        GetComponent<Explosion>().Explode();
+        //GetComponent<Explosion>().Explode();
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<CustomVRControls>().TakeDamage(damage);
             Debug.Log("Cloud: " + damage);
         }
         Destroy(gameObject); //Then object is destroyed
+        GameObject explosion = Instantiate(effect, transform.position, Quaternion.identity) as GameObject;
+        Destroy(explosion, 2);
 
     }
 }

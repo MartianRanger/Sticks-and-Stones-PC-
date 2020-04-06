@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     public bool speaking;
 
     public GameObject bubble;
-    public float speechBubbleSpeed = 500f;
+    public float speechBubbleSpeed = 5f;
     public Transform speechBubbleSpawn;
 
     public float speechSpeed = 0;
@@ -64,10 +64,8 @@ public class PlayerScript : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        /*
-                 if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            isSpeaking = true;
             Debug.Log("Starting to Record");
             StartRecord();
         }
@@ -77,7 +75,7 @@ public class PlayerScript : MonoBehaviour
 
             StopRecord();
         }
-        if (Input.GetMouseButtonDown(0) && recorded = true)
+        if (Input.GetMouseButtonDown(0) && recorded == true)
         {
             GameObject temp = new GameObject();
             temp = Instantiate(bubble, speechBubbleSpawn.position, speechBubbleSpawn.rotation);
@@ -87,8 +85,6 @@ public class PlayerScript : MonoBehaviour
             recorded = false;
             //Fire(launchForce, 1);
         }
-
-         */
     }
 
     public void TakeDamage(int amount)
@@ -136,6 +132,7 @@ public class PlayerScript : MonoBehaviour
         speechSpeed = audioSource.time;
         audioSlider.value = speechSpeed;
 
+        audioSource.Play();
         ShowRecording(speechSpeed);
         Debug.Log("Temp Destroyed");
         Debug.Log("Audio clip length : " + audioSource.clip.length);

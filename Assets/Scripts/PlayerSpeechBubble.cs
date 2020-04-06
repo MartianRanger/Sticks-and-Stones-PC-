@@ -7,6 +7,8 @@ public class PlayerSpeechBubble : Speech //Different speech bubble type that is 
     public float thrust = 1.0f;
     public Rigidbody rb;
 
+    public GameObject effect;
+
     public void CreateSpeechBubble(AudioClip recording) //Was originally going to be Load Sound method, but didn't work with recordings. Stores recording into speech bubble.
     {
         thisSound = GetComponent<AudioSource>();
@@ -34,6 +36,8 @@ public class PlayerSpeechBubble : Speech //Different speech bubble type that is 
 
         }
         Destroy(gameObject); //Then object is destroyed
+        GameObject explosion = Instantiate(effect, transform.position, Quaternion.identity) as GameObject;
+        Destroy(explosion, 2);
 
     }
 

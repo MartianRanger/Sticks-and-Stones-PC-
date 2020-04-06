@@ -3,7 +3,12 @@ guid: dd43bfd3001ad914780007bcce822a59
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - thisSound: {instanceID: 0}
+  - sound: {instanceID: 0}
+  - speechBubble: {instanceID: 0}
+  - effect: {fileID: 8845334245363759562, guid: 0a8241204a47bcd47b5fd74a594e5426,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
