@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     //Script for enemy AI. Not a lot more to say
@@ -19,6 +19,20 @@ public class EnemyAI : MonoBehaviour
     public const int maxHealth = 100; //Sets health for 100
     public Slider healthBar; //Connects to Slider so we can see his health
 
+    public NavMeshAgent agent;
+    public Transform destination;
+
+    bool patrolWaiting;
+    float totalWaitTime = 3f;
+
+    float randomSwitch = 0.2f;
+    List<Transform> patrolPoints;
+
+    int currentPatrolIndex;
+    bool traveling;
+    bool waiting;
+    bool patrolForward;
+    float waitTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +41,33 @@ public class EnemyAI : MonoBehaviour
         healthBar.maxValue = maxHealth; //Sets health
         healthBar.value = currentHealth;
 
+        agent = this.GetComponent<NavMeshAgent>();
+
+        if(agent == null)
+        {
+            Debug.Log("No Nav mesh Here");
+        }
+        else
+        {
+            if(patrolPoints != null && patrolPoints.Count >= 2)
+            {
+                currentPatrolIndex = 0;
+                //SetDestination();
+            }
+        }
+            
     }
+    /*
+      private void SetDestination()
+      {
+         if (patrolPoints != null)
+         {
+            Vector3 targetVector = destination.transform.position;
+            agent.SetDestination(targetVector);
+            traveling = true;
+         }
+      }
+     */
     //Possible methods to find player
     private Vector3 GetDirection()
     {
@@ -74,5 +114,56 @@ public class EnemyAI : MonoBehaviour
         enemyAnimator.SetInteger("distanceFromPlayer", Mathf.RoundToInt(distance));
         //transform.LookAt(player.transform.position);
 
+        agent.SetDestination(destination.transform.position);
+
+        if(traveling && agent.remainingDistance > agent.stoppingDistance)
+        {
+            traveling = false;
+
+            if(patrolWaiting)
+            {
+                waiting = true;
+                waitTimer = 0f;
+            }
+            else
+            {
+                //ChangePatrolPoint();
+                //SetDestination();
+            }
+            //Move code
+        }
+        
+        if(waiting)
+        {
+            waitTimer += Time.deltaTime;
+            if(waitTimer >= totalWaitTime)
+            {
+                waiting = false;
+                //ChangePatrolPoint();
+                //SetDestination();
+
+
+            }
+        }
+    }
+
+    private void ChangePatrolPoint()
+    {
+        if(Random.Range(0f, 1f) <= randomSwitch)
+        {
+            patrolForward = !patrolForward;
+        }
+        
+        if(patrolForward)
+        {
+            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+        }
+        else
+        {
+            if(--currentPatrolIndex<0)
+            {
+                currentPatrolIndex = patrolPoints.Count - 1;
+            }
+        }
     }
 }
