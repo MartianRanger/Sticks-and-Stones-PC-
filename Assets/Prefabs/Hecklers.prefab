@@ -262,6 +262,11 @@ MonoBehaviour:
   enemyAnimator: {fileID: 5208114017645251531}
   currentHealth: 100
   healthBar: {fileID: 7185008414272740382}
+  agent: {fileID: 0}
+  destination: {fileID: 0}
+  chaseRadius: 20
+  facePlayer: 20
+  distToPlayer: 5
 --- !u!195 &7727719805918250879
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -278,7 +283,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

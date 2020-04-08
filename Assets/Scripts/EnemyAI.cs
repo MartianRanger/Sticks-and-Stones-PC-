@@ -26,13 +26,19 @@ public class EnemyAI : MonoBehaviour
     float totalWaitTime = 3f;
 
     float randomSwitch = 0.2f;
-    List<Transform> patrolPoints;
+    public Transform[] patrolPoints;
 
     int currentPatrolIndex;
     bool traveling;
     bool waiting;
     bool patrolForward;
     float waitTimer;
+
+    public float chaseRadius = 20f;
+    public float facePlayer = 20f;
+    public float distToPlayer = 5.0f;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,13 +49,16 @@ public class EnemyAI : MonoBehaviour
 
         agent = this.GetComponent<NavMeshAgent>();
 
-        if(agent == null)
+        patrolPoints = GameObject.FindGameObjectWithTag("EnemySpawn").GetComponent<EnemySpawn>().patrolPoints;
+        if (agent == null)
         {
             Debug.Log("No Nav mesh Here");
         }
         else
         {
-            if(patrolPoints != null && patrolPoints.Count >= 2)
+            agent.enabled = true;
+
+            if (patrolPoints != null && patrolPoints.Length >= 2)
             {
                 currentPatrolIndex = 0;
                 //SetDestination();
@@ -57,17 +66,15 @@ public class EnemyAI : MonoBehaviour
         }
             
     }
-    /*
       private void SetDestination()
       {
          if (patrolPoints != null)
          {
-            Vector3 targetVector = destination.transform.position;
+            Vector3 targetVector = patrolPoints[currentPatrolIndex].transform.position;
             agent.SetDestination(targetVector);
             traveling = true;
          }
       }
-     */
     //Possible methods to find player
     private Vector3 GetDirection()
     {
@@ -114,39 +121,50 @@ public class EnemyAI : MonoBehaviour
         enemyAnimator.SetInteger("distanceFromPlayer", Mathf.RoundToInt(distance));
         //transform.LookAt(player.transform.position);
 
-        agent.SetDestination(destination.transform.position);
+        //agent.SetDestination(destination.transform.position);
 
-        if(traveling && agent.remainingDistance > agent.stoppingDistance)
+        if (distance > chaseRadius)
+        {
+            Patrol();
+        }
+        else if (distance <= chaseRadius)
+        {
+            //ChasePlayer();
+            //AttackPlayer();
+        }
+        
+    }
+
+    private void Patrol()
+    {
+        if (traveling && agent.remainingDistance > agent.stoppingDistance)
         {
             traveling = false;
 
-            if(patrolWaiting)
+            if (patrolWaiting)
             {
                 waiting = true;
                 waitTimer = 0f;
             }
             else
             {
-                //ChangePatrolPoint();
-                //SetDestination();
+                ChangePatrolPoint();
+                SetDestination();
             }
             //Move code
         }
-        
-        if(waiting)
+
+        if (waiting)
         {
             waitTimer += Time.deltaTime;
-            if(waitTimer >= totalWaitTime)
+            if (waitTimer >= totalWaitTime)
             {
                 waiting = false;
-                //ChangePatrolPoint();
-                //SetDestination();
-
-
+                ChangePatrolPoint();
+                SetDestination();
             }
         }
     }
-
     private void ChangePatrolPoint()
     {
         if(Random.Range(0f, 1f) <= randomSwitch)
@@ -156,14 +174,35 @@ public class EnemyAI : MonoBehaviour
         
         if(patrolForward)
         {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
         }
         else
         {
             if(--currentPatrolIndex<0)
             {
-                currentPatrolIndex = patrolPoints.Count - 1;
+                currentPatrolIndex = patrolPoints.Length - 1;
             }
         }
+    }
+    private void ChasePlayer()
+    {
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        enemyAnimator.SetInteger("distanceFromPlayer", Mathf.RoundToInt(distance));
+
+        if(distance <= chaseRadius && distance > distToPlayer)
+        {
+            agent.SetDestination(player.position);
+        }
+        else if (distance <= distToPlayer)
+        {
+            agent.ResetPath();
+        }
+    }
+    void AttackPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * facePlayer);
     }
 }

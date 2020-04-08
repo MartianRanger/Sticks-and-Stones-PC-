@@ -13,6 +13,7 @@ TagManager:
   - listlast
   - Enemy
   - SpeechBubble
+  - EnemySpawn
   layers:
   - Default
   - TransparentFX

@@ -22,6 +22,8 @@ public class EnemySpawn : MonoBehaviour //Script to spawn enemies
     private int totalWaves;
 
     private GameManager gameManager;
+
+    public Transform[] patrolPoints;
     // Start is called before the first frame update
     void Start()
     {

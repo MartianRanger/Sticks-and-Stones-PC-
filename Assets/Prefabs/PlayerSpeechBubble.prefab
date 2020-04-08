@@ -225,7 +225,7 @@ MonoBehaviour:
   speechBubble: {fileID: 0}
   damageFactor: 5
   speed: 0
-  damage: 1
+  damage: 4
   thrust: 1
   rb: {fileID: 0}
   effect: {fileID: 8845334245363759562, guid: 0a8241204a47bcd47b5fd74a594e5426, type: 3}
