@@ -201,12 +201,12 @@ public class EnemyAI : MonoBehaviour
             //agent.isStopped = true;
 
         }
-        else if (distance <= distToPlayer)
+        else
         {
             //agent.isStopped = false;
             //agent.isStopped = false;
 
-            //agent.ResetPath();
+            agent.ResetPath();
             enemyAnimator.SetBool("attacking", false);
         }
         Debug.Log("Distance; " + distance + " afadf: " + distToPlayer);

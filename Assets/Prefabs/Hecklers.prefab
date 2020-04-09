@@ -264,9 +264,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   destination: {fileID: 0}
   patrolPoints: []
-  chaseRadius: 20
+  chaseRadius: 50
   facePlayer: 20
-  distToPlayer: 5
+  distToPlayer: 20
 --- !u!195 &7727719805918250879
 NavMeshAgent:
   m_ObjectHideFlags: 0

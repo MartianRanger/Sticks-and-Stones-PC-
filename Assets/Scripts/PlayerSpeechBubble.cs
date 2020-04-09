@@ -43,7 +43,7 @@ public class PlayerSpeechBubble : Speech //Different speech bubble type that is 
 
     public void LoadDamage() //Calcuates the damage for each bubble 
     {
-        damage = (int)(2 * thisSound.clip.length);
+        damage = (int)(5 * thisSound.clip.length);
         Debug.Log("DAMGE!" + damageFactor);
     }
 }

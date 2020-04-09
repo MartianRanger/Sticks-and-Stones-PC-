@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     public bool speaking;
 
     public GameObject bubble;
-    public float speechBubbleSpeed = 5f;
+    public float speechBubbleSpeed = 500f;
     public Transform speechBubbleSpawn;
 
     public float speechSpeed = 0;
@@ -68,10 +68,13 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Starting to Record");
             StartRecord();
+            StartCoroutine("FillBar"); // this would be after you click the button for instance.
+
         }
         if (Input.GetMouseButtonUp(1))
         {
             Debug.Log("Ending to Record");
+            StopCoroutine("FillBar"); // this would be after you click the button for instance.
 
             StopRecord();
         }
@@ -84,6 +87,17 @@ public class PlayerScript : MonoBehaviour
             temp.GetComponent<Rigidbody>().AddForce(speechBubbleSpawn.forward * speechBubbleSpeed, ForceMode.Impulse);
             recorded = false;
             //Fire(launchForce, 1);
+        }
+    }
+
+    IEnumerator FillBar()
+    {
+        float runtime = 10f;
+        for (float fill = 0; fill <= runtime; fill += Time.deltaTime)
+        { // would take you one second to fill, adjust as desired.
+          // here you can adjust the image fill amount or the slider value
+            audioSlider.value = Mathf.Lerp(1, 10, fill / runtime);
+            yield return null;
         }
     }
 
