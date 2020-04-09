@@ -134,7 +134,7 @@ public class EnemyAI : MonoBehaviour
             ChasePlayer();
             AttackPlayer();
         }
-        Debug.Log("Distance: " + distance + ", chaseRadius: " + chaseRadius);
+        //Debug.Log("Distance: " + distance + ", chaseRadius: " + chaseRadius);
     }
 
     private void Patrol()
@@ -209,7 +209,7 @@ public class EnemyAI : MonoBehaviour
             agent.ResetPath();
             enemyAnimator.SetBool("attacking", false);
         }
-        Debug.Log("Distance; " + distance + " afadf: " + distToPlayer);
+        //Debug.Log("Distance; " + distance + " afadf: " + distToPlayer);
     }
     void AttackPlayer()
     {

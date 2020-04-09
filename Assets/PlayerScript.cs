@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     public bool speaking;
 
     public GameObject bubble;
-    public float speechBubbleSpeed = 500f;
+    public float speechBubbleSpeed = 5f;
     public Transform speechBubbleSpawn;
 
     public float speechSpeed = 0;
@@ -38,6 +38,7 @@ public class PlayerScript : MonoBehaviour
     public Slider audioSlider;
     public Slider healthBar;
 
+    public bool shield = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +94,7 @@ public class PlayerScript : MonoBehaviour
     IEnumerator FillBar()
     {
         float runtime = 10f;
+
         for (float fill = 0; fill <= runtime; fill += Time.deltaTime)
         { // would take you one second to fill, adjust as desired.
           // here you can adjust the image fill amount or the slider value

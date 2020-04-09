@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 921227887273344251}
   - component: {fileID: -5853452402207219697}
   - component: {fileID: 5905626164997763397}
+  - component: {fileID: 9096773558551021033}
   m_Layer: 0
   m_Name: PlayerSpeechBubble
   m_TagString: Untagged
@@ -225,7 +226,23 @@ MonoBehaviour:
   speechBubble: {fileID: 0}
   damageFactor: 5
   speed: 0
-  damage: 17
+  damage: 3
   thrust: 1
   rb: {fileID: 0}
   effect: {fileID: 8845334245363759562, guid: 0a8241204a47bcd47b5fd74a594e5426, type: 3}
+--- !u!208 &9096773558551021033
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705267429798877681}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.005, y: 0.003, z: 0.003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -0.002}
+  m_TimeToStationary: 0.5

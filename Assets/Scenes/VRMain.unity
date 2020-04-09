@@ -2437,6 +2437,11 @@ PrefabInstance:
       propertyPath: speed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3763227752239229477, guid: 97a81e0ae5156e8478e187e692a3887f,
+        type: 3}
+      propertyPath: speechBubbleSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3763227752239229478, guid: 97a81e0ae5156e8478e187e692a3887f,
         type: 3}
       propertyPath: m_LocalPosition.x
