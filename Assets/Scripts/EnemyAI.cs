@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     public NavMeshAgent agent;
     public Transform destination;
 
-    bool patrolWaiting;
+    bool patrolWaiting = true;
     float totalWaitTime = 3f;
 
     float randomSwitch = 0.2f;
@@ -34,9 +34,9 @@ public class EnemyAI : MonoBehaviour
     bool patrolForward;
     float waitTimer;
 
-    public float chaseRadius = 20f;
+    public float chaseRadius = 50f;
     public float facePlayer = 20f;
-    public float distToPlayer = 5.0f;
+    public float distToPlayer = 10f;
 
     
     // Start is called before the first frame update
@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
         healthBar.value = currentHealth;
 
         agent = this.GetComponent<NavMeshAgent>();
-
+        agent.Warp(startingPosition);
         patrolPoints = GameObject.FindGameObjectWithTag("EnemySpawn").GetComponent<EnemySpawn>().patrolPoints;
         if (agent == null)
         {
@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour
             if (patrolPoints != null && patrolPoints.Length >= 2)
             {
                 currentPatrolIndex = 0;
-                //SetDestination();
+                SetDestination();
             }
         }
             
@@ -72,6 +72,7 @@ public class EnemyAI : MonoBehaviour
          {
             Vector3 targetVector = patrolPoints[currentPatrolIndex].transform.position;
             agent.SetDestination(targetVector);
+            Debug.Log("Target Vector: " + targetVector);
             traveling = true;
          }
       }
@@ -119,6 +120,7 @@ public class EnemyAI : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
 
         enemyAnimator.SetInteger("distanceFromPlayer", Mathf.RoundToInt(distance));
+        enemyAnimator.SetBool("moving", true);
         //transform.LookAt(player.transform.position);
 
         //agent.SetDestination(destination.transform.position);
@@ -129,10 +131,10 @@ public class EnemyAI : MonoBehaviour
         }
         else if (distance <= chaseRadius)
         {
-            //ChasePlayer();
-            //AttackPlayer();
+            ChasePlayer();
+            AttackPlayer();
         }
-        
+        Debug.Log("Distance: " + distance + ", chaseRadius: " + chaseRadius);
     }
 
     private void Patrol()
@@ -143,6 +145,7 @@ public class EnemyAI : MonoBehaviour
 
             if (patrolWaiting)
             {
+                enemyAnimator.SetBool("moving", false);
                 waiting = true;
                 waitTimer = 0f;
             }
@@ -192,12 +195,21 @@ public class EnemyAI : MonoBehaviour
 
         if(distance <= chaseRadius && distance > distToPlayer)
         {
-            agent.SetDestination(player.position);
+            //agent.SetDestination(player.position);
+            enemyAnimator.SetBool("attacking", true);
+            //agent.ResetPath();
+            //agent.isStopped = true;
+
         }
         else if (distance <= distToPlayer)
         {
-            agent.ResetPath();
+            //agent.isStopped = false;
+            //agent.isStopped = false;
+
+            //agent.ResetPath();
+            enemyAnimator.SetBool("attacking", false);
         }
+        Debug.Log("Distance; " + distance + " afadf: " + distToPlayer);
     }
     void AttackPlayer()
     {

@@ -14,7 +14,7 @@ public class WalkingBehaviour : StateMachineBehaviour //Script for walking state
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.position = Vector3.MoveTowards(animator.transform.position, playerPos.position, speed * Time.deltaTime); //Moves towards them
+        //animator.transform.position = Vector3.MoveTowards(animator.transform.position, playerPos.position, speed * Time.deltaTime); //Moves towards them
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -41,7 +41,7 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
         //GetComponent<Explosion>().Explode();
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<CustomVRControls>().TakeDamage(damage);
+            other.gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
             Debug.Log("Cloud: " + damage);
         }
         Destroy(gameObject); //Then object is destroyed
