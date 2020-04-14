@@ -48,14 +48,15 @@ public class EnemyAI : MonoBehaviour
         healthBar.value = currentHealth;
 
         agent = this.GetComponent<NavMeshAgent>();
-        agent.Warp(startingPosition);
-        patrolPoints = GameObject.FindGameObjectWithTag("EnemySpawn").GetComponent<EnemySpawn>().patrolPoints;
         if (agent == null)
         {
             Debug.Log("No Nav mesh Here");
         }
         else
         {
+            agent.Warp(startingPosition);
+            patrolPoints = GameObject.FindGameObjectWithTag("EnemySpawn").GetComponent<EnemySpawn>().patrolPoints;
+
             agent.enabled = true;
 
             if (patrolPoints != null && patrolPoints.Length >= 2)

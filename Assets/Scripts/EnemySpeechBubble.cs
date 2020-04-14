@@ -8,9 +8,14 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
 
     public GameObject effect;
     // Awake is called before the first frame update
+
+    Vector3 mDir;
+    Rigidbody rigid;
+    public float moveSpeed = 5f;
     void Awake()
     {
         LoadSound();
+        rigid = GetComponent<Rigidbody>();
     }
 
     public override void LoadSound() //Takes a random clip from the Audio folder and places it inside our speech bubble
@@ -37,16 +42,28 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
     }
     void OnCollisionEnter(Collision other) //Method is needed to determine whether or not it hits a player
     {
-        PlaySound(); //Plays sound at an actual position, which will be whether it hits a collider
-        //GetComponent<Explosion>().Explode();
-        if (other.gameObject.tag == "Player")
+        if (!other.gameObject.CompareTag("Shield"))
         {
-            other.gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
-            Debug.Log("Cloud: " + damage);
+            PlaySound(); //Plays sound at an actual position, which will be whether it hits a collider
+                         //GetComponent<Explosion>().Explode();
+            if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
+                Debug.Log("Cloud: " + damage);
+            }
+            Destroy(gameObject); //Then object is destroyed
+            GameObject explosion = Instantiate(effect, transform.position, Quaternion.identity) as GameObject;
+            Destroy(explosion, 2);
         }
-        Destroy(gameObject); //Then object is destroyed
-        GameObject explosion = Instantiate(effect, transform.position, Quaternion.identity) as GameObject;
-        Destroy(explosion, 2);
+        else
+        {
+            Vector3 wallNormal = other.contacts[0].normal;
+            mDir = Vector3.Reflect(rigid.velocity, wallNormal).normalized;
+            rigid.velocity = mDir * moveSpeed;
+            Destroy(gameObject, 10);
+            GameObject explosion = Instantiate(effect, transform.position, Quaternion.identity) as GameObject;
+            Destroy(explosion, 2);
 
+        }
     }
 }

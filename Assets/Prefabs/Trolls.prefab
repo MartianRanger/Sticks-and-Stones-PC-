@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 7185008414743285166}
   - component: {fileID: 7185008414743285165}
   - component: {fileID: 7185008414743285154}
+  - component: {fileID: -9093359454489889414}
   m_Layer: 0
   m_Name: Trolls
   m_TagString: Enemy
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195611158954382498}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5ba7fc0d529a224094f039ecf226753, type: 3}
   m_Name: 
@@ -266,6 +267,22 @@ MonoBehaviour:
   chaseRadius: 50
   facePlayer: 20
   distToPlayer: 20
+--- !u!114 &-9093359454489889414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195611158954382498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e205b06a9dad9a41b9b85111fa6b9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunEnd: {fileID: 7185008415214588354}
+  bullet: {fileID: 5705267429798877681, guid: 6bf443050e50e3c4d949d26e32d25173, type: 3}
+  navigationUpdate: 0
+  speechBubbleSpawn: {fileID: 7185008415214588354}
 --- !u!1 &1281693532107230913
 GameObject:
   m_ObjectHideFlags: 0
