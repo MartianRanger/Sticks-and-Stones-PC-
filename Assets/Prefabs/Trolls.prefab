@@ -283,6 +283,7 @@ MonoBehaviour:
   bullet: {fileID: 5705267429798877681, guid: 6bf443050e50e3c4d949d26e32d25173, type: 3}
   navigationUpdate: 0
   speechBubbleSpawn: {fileID: 7185008415214588354}
+  enemyAnimator: {fileID: 5208114017645251531}
 --- !u!1 &1281693532107230913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,13 +1526,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7185008415214588353}
-  m_LocalRotation: {x: -0.06162845, y: 0.70441604, z: -0.06162845, w: -0.70441604}
+  m_LocalRotation: {x: -0.030843573, y: 0.7064338, z: -0.030843573, w: -0.7064338}
   m_LocalPosition: {x: -0.16559996, y: 0.045199998, z: 0}
   m_LocalScale: {x: 0.013333334, y: 0.013333332, z: 0.013333335}
   m_Children: []
   m_Father: {fileID: 7676614871458387077}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 10, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 270, z: 0}
 --- !u!1 &7941071503605927387
 GameObject:
   m_ObjectHideFlags: 0

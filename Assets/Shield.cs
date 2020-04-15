@@ -40,6 +40,7 @@ public class Shield : MonoBehaviour
             isActive = false;
             StopCoroutine("ActivateShield");
             StartCoroutine("CloseShield");
+            Debug.Log("NOT ACTIVE");
         }
     }
     IEnumerator ActivateShield()

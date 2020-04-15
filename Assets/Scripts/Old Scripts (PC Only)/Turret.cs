@@ -7,71 +7,31 @@ public class Turret : MonoBehaviour
     Transform player;
     public Transform gunEnd;
     public GameObject bullet;
-    private NavMeshAgent nav;
     public float navigationUpdate;
     private float navigationTime = 0;
     private float rotationSpeed = 3.0f;
     private float moveSpeed = 3.0f;
     public Transform speechBubbleSpawn;
     // Use this for initialization
-    void Awake()
+
+    public Animator enemyAnimator; //Variable for animator controller
+
+    void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);//search target right at beginning, at a rate of .5 seconds
-        nav = GetComponent<NavMeshAgent>();
-        nav.Warp(transform.position);
-        nav.enabled = true;
+        player = GameObject.FindGameObjectWithTag("Player").transform; //Finds player position in scene
     }
     void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
-        if (player != null)
-        {
-            if (distance <= 110 && distance >= 15)
-            {
-                /*
-                navigationTime += Time.deltaTime;
-                if (navigationTime > navigationUpdate)
-                {
-                    if(!nav.isOnNavMesh)
-                    {
-                        navigationTime = 0;
-                        nav.enabled = false;
-                        nav.enabled = true;
-                        Debug.Log(nav.isOnNavMesh);
-                    }
-                    nav.SetDestination(player.position);
-                }*/
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.position - transform.position), rotationSpeed * Time.deltaTime);
-                transform.position += transform.forward * moveSpeed * Time.deltaTime;
-                Debug.Log("CHASING");
-            }
-        }
-    }
 
-    // Update is called once per frame
-    void UpdateTarget()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyAnimator.SetInteger("distanceFromPlayer", Mathf.RoundToInt(distance));
+
         transform.LookAt(player.transform.position);
-        gunEnd.LookAt(player.transform.position);
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("Player Detected");
-            StartCoroutine("Shooting");
-        }
 
+        //Debug.Log(distance);
     }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            StopCoroutine("Shooting");
-        }
-    }
-    IEnumerator Shooting()
+
+    /*IEnumerator Shooting()
     {
         while (true)
         {
@@ -83,5 +43,5 @@ public class Turret : MonoBehaviour
 
             yield return new WaitForSeconds(length);
         }
-    }
+    }*/
 }

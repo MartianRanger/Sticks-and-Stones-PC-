@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8148024519967046300
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac1f71e45e35dc46bd90cce7fb6113b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4823765491471818600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -33,9 +21,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: attacking
-    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: distanceFromPlayer
+    m_EventTreshold: 25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3644365065773404337}
   m_Solo: 0
@@ -140,7 +128,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -4651550633178571840}
   m_StateMachineBehaviours:
-  - {fileID: 7757045284088425495}
+  - {fileID: 6004388315639411147}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -168,8 +156,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5937458774713287837}
-  m_StateMachineBehaviours:
-  - {fileID: -8148024519967046300}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -193,9 +180,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: attacking
-    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: distanceFromPlayer
+    m_EventTreshold: 25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1508767008482039375}
   m_Solo: 0
@@ -210,7 +197,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &7757045284088425495
+--- !u!114 &6004388315639411147
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,7 +206,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7bfb2e43119f03459fec26f33add002, type: 3}
+  m_Script: {fileID: 11500000, guid: addcf7857604cc94ab83ef025ca176a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speechBubbleSpawn: {fileID: 0}
+  speechBubble: {fileID: 0}
+  player: {fileID: 0}

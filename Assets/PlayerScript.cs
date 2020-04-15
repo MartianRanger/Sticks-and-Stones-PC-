@@ -8,8 +8,8 @@ public class PlayerScript : MonoBehaviour
 {
     public CharacterController controller;
 
-    public float speed = 12f;
-    public float gravity = -9.81f;
+    public float speed = 120f;
+    public float gravity = 9.81f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -62,6 +62,7 @@ public class PlayerScript : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+        move.y -= gravity * Time.deltaTime;
 
         controller.Move(move * speed * Time.deltaTime);
 

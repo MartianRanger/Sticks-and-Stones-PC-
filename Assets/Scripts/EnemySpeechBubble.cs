@@ -12,10 +12,29 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
     Vector3 mDir;
     Rigidbody rigid;
     public float moveSpeed = 5f;
+
+    [SerializeField]
+    private float minVelocity = 10f;
+
+    private Vector3 lastFrameVelocity;
+
+    private Vector3 initialVelocity;
+    private float bias = 0.5f;
+    [SerializeField]
+    private float bounceVelocity = 10f;
+    private Transform enemyTransform;
+
     void Awake()
     {
         LoadSound();
         rigid = GetComponent<Rigidbody>();
+        rigid.velocity = initialVelocity;
+        enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
+    }
+
+    private void Update()
+    {
+        lastFrameVelocity = rigid.velocity;
     }
 
     public override void LoadSound() //Takes a random clip from the Audio folder and places it inside our speech bubble
@@ -57,13 +76,30 @@ public class EnemySpeechBubble : Speech //Different speech bubble type that is o
         }
         else
         {
-            Vector3 wallNormal = other.contacts[0].normal;
-            mDir = Vector3.Reflect(rigid.velocity, wallNormal).normalized;
-            rigid.velocity = mDir * moveSpeed;
+            Bounce(other.contacts[0].normal);
+
             Destroy(gameObject, 10);
             GameObject explosion = Instantiate(effect, transform.position, Quaternion.identity) as GameObject;
             Destroy(explosion, 2);
 
         }
     }
+    private void Bounce(Vector3 collisionNormal)
+    {
+        /*var speed = lastFrameVelocity.magnitude;
+        var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
+
+        Debug.Log("Out Direction: " + direction);
+        rigid.velocity = direction * Mathf.Max(speed, minVelocity);*/
+        var speed = lastFrameVelocity.magnitude;
+        var bounceDirection = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
+        var directionToPlayer = enemyTransform.position - transform.position;
+
+        var direction = Vector3.Lerp(bounceDirection, directionToPlayer, bias);
+
+        Debug.Log("Out Direction: " + direction);
+        rigid.velocity = direction * bounceVelocity;
+
+    }
+
 }

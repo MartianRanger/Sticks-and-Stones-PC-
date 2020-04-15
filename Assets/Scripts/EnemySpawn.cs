@@ -63,7 +63,10 @@ public class EnemySpawn : MonoBehaviour //Script to spawn enemies
             int spawnPoint = Random.Range(0, SpawnPoints.Length);
 
             GameObject newEnemy = Instantiate(enemy, SpawnPoints[spawnPoint].position, SpawnPoints[spawnPoint].rotation) as GameObject;
-            newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(SpawnPoints[spawnPoint].position);
+            if(newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>() != null)
+            {
+                newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(SpawnPoints[spawnPoint].position);
+            }
             yield return new WaitForSeconds(timeBetweenEnemies);
         }
 

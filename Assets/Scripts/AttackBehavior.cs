@@ -9,7 +9,7 @@ public class AttackBehavior : StateMachineBehaviour
     public Transform speechBubbleSpawn;
     public GameObject speechBubble;
     private float rotationSpeed = 3.0f;
-
+    public Transform player;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Shoot();
@@ -17,7 +17,8 @@ public class AttackBehavior : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator.transform.LookAt(player.transform.position);
     }
 
     /*
