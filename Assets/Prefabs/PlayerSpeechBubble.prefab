@@ -226,10 +226,10 @@ MonoBehaviour:
   speechBubble: {fileID: 0}
   damageFactor: 5
   speed: 0
-  damage: 2
+  damage: 4
   thrust: 1
   rb: {fileID: 0}
-  effect: {fileID: 8845334245363759562, guid: 0a8241204a47bcd47b5fd74a594e5426, type: 3}
+  effect: {fileID: 3114792770202045922, guid: 1e0c715be2e9ddd44b2540371a7c8bb8, type: 3}
 --- !u!208 &9096773558551021033
 NavMeshObstacle:
   m_ObjectHideFlags: 0

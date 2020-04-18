@@ -228,9 +228,10 @@ MonoBehaviour:
   speed: 0
   damage: 0
   myClips: []
-  effect: {fileID: 8845334245363759562, guid: 0a8241204a47bcd47b5fd74a594e5426, type: 3}
+  effect: {fileID: 3114792770202045922, guid: 1e0c715be2e9ddd44b2540371a7c8bb8, type: 3}
   moveSpeed: 5
   minVelocity: 10
+  bounceVelocity: 10
 --- !u!114 &8244974703422219390
 MonoBehaviour:
   m_ObjectHideFlags: 0
